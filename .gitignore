@@ -32,13 +32,6 @@ Renviron.site
 # Package build files
 *.tar.gz
 
-# Data folders
-data/
-data-raw/
-raw_data/
-processed_data/
-output/
-
 # Common data file types
 *.csv
 *.tsv
