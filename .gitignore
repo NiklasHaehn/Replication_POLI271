@@ -1,4 +1,63 @@
-.Rproj.user
+# R session / history
 .Rhistory
+.Rapp.history
 .RData
 .Ruserdata
+
+# R project
+*.Rproj.user
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Quarto / R Markdown intermediates
+*_files/
+_cache/
+cache/
+figure/
+figures/
+*.utf8.md
+*.knit.md
+
+# Logs
+*.log
+
+# Environments
+.Renviron
+Renviron.site
+.env
+.env.*
+
+# Package build files
+*.tar.gz
+
+# Data folders
+data/
+data-raw/
+raw_data/
+processed_data/
+output/
+
+# Common data file types
+*.csv
+*.tsv
+*.txt
+*.rds
+*.Rds
+*.RData
+*.rdata
+*.parquet
+*.feather
+*.fst
+*.sav
+*.dta
+*.xlsx
+*.xls
+*.json
+
+# Optional: model outputs / large binaries
+*.rda
+*.pb
+*.pkl
+*.joblib
