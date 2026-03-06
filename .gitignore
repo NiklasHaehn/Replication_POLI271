@@ -54,3 +54,6 @@ Renviron.site
 *.pb
 *.pkl
 *.joblib
+
+# Exception
+!MP_data.csv
