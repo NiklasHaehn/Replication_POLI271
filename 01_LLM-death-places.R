@@ -107,11 +107,6 @@ extract_death_place <- function(txt) {
     normalize_death_place()
 }
 
-#safe_extract_death_place <- purrr::possibly(
-#  extract_death_place,
-#  otherwise = NA_character_
-#)
-
 safe_extract_death_place <- purrr::possibly( 
   function(txt) {
     withTimeout(
@@ -123,68 +118,42 @@ safe_extract_death_place <- purrr::possibly(
   otherwise = NA_character_ 
 )
 
-mp_data <- read_csv("data/raw/MP_data/MP_data.csv", show_col_types = FALSE) |>
-  sample_n(300)
+
+# Load Data ---------------------------------------------------------------
+
+mp_data <- read_csv("data/raw/MP_data/MP_data.csv", show_col_types = FALSE)
 
 mp_profiles <- mp_data |>
+  filter(
+    !is.na(bio_deathday) | 
+  as.Date(bio_deathday) > as.Date("1970-01-01")
+  ) |> 
   distinct(id_bioguide, .keep_all = TRUE) |>
-  transmute(id_bioguide, bio_profile_text)
-
-chunk_size <- 100
-mp_profiles <- mp_profiles |> 
-  mutate(chunk_id = ceiling(row_number() / chunk_size))
-
-chunks <- split(mp_profiles, mp_profiles$chunk_id)
-results_list <- list()
+  transmute(id_bioguide, bio_profile_text) |> 
+  sample_n(50)
 
 handlers(handler_progress(
   format = "[:bar] :percent | ETA: :eta | Row :current/:total",
   clear = FALSE, width = 60
 ))
 
-# 6. The Main Extraction Loop
-with_progress({
+death_place_labels <- with_progress({
   p <- progressor(steps = nrow(mp_profiles))
-  
-  for (i in seq_along(chunks)) {
-    
-    # Process the current chunk row-by-row
-    chunk_results <- chunks[[i]] |> 
-      mutate(Death_Place_llama3 = map_chr(bio_profile_text, function(txt) {
-        
-        # Call the safe AI function
+  mp_profiles |>
+    mutate(
+      Death_Place_llama3 = map_chr(bio_profile_text, \(txt) {
         res <- safe_extract_death_place(txt)
-        
-        # Update progress bar
-        p() 
-        
-        # Network breather: wait 0.5 seconds to prevent overloading sockets
-        Sys.sleep(0.5) 
-        
-        return(res)
-      }))
-    
-    # Add to our running list
-    results_list[[i]] <- chunk_results
-    
-    # Save the checkpoint CSV for everything done so far
-    cumulative_data <- bind_rows(results_list)
-    write_csv(
-      cumulative_data, 
-      glue("data/fmt/MP_data_llama3_CHECKPOINT_{i}.csv"), 
-      na = ""
-    )
-  }
+        p()
+        Sys.sleep(0.1)
+        res
+      })
+    ) |>
+    select(id_bioguide, Death_Place_llama3)
 })
-
-#death_place_labels <- mp_profiles |>
-#  mutate(Death_Place_llama3 = map_chr(bio_profile_text, safe_extract_death_place)) |>
-#  select(id_bioguide, Death_Place_llama3)
 
 mp_data_llama3 <- mp_data |>
   left_join(death_place_labels, by = "id_bioguide")
 
 write_csv(mp_data_llama3, "data/fmt/MP_data_llama3.csv", na = "")
 
-death_place_labels
-mp_profiles$bio_profile_text
+print(death_place_labels, n = Inf)

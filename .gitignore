@@ -57,3 +57,4 @@ Renviron.site
 
 # Exception
 !MP_data.csv
+.Rproj.user
