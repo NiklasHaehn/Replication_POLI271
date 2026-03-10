@@ -6,7 +6,7 @@ library(R.utils)
 
 set.seed(1234)
 
-model_name <- "llama3.2:1b"
+model_name <- "llama3.2:latest"
 
 prompt_death_place <- function(txt) {
   glue(
@@ -107,16 +107,38 @@ extract_death_place <- function(txt) {
     normalize_death_place()
 }
 
-safe_extract_death_place <- purrr::possibly( 
-  function(txt) {
-    withTimeout(
-      extract_death_place(txt),
-      timeout = 30,         # Maximum 10 seconds per biography
-      onTimeout = "error"   # Throws an error to be caught by possibly() if it hangs
-    )
-  }, 
-  otherwise = NA_character_ 
-)
+safe_extract_death_place <- \(txt) {
+  out <- tryCatch(
+    list(
+      value = withTimeout(
+        extract_death_place(txt),
+        timeout = 90,
+        onTimeout = "error"
+      ),
+      error = NA_character_
+    ),
+    TimeoutException = \(e) list(value = NA_character_, error = conditionMessage(e)),
+    interrupt = \(e) list(value = NA_character_, error = conditionMessage(e)),
+    error = \(e) list(value = NA_character_, error = conditionMessage(e))
+  )
+  
+  if (!is.list(out) || !all(c("value", "error") %in% names(out))) {
+    return(list(value = NA_character_, error = "invalid result structure"))
+  }
+  
+  value <- out$value
+  value <- if (is.character(value) && length(value) == 1) value else NA_character_
+  
+  error <- out$error
+  error <- if (
+    is.character(error) &&
+      length(error) == 1 &&
+      !is.na(error) &&
+      str_squish(error) != ""
+  ) error else NA_character_
+  
+  list(value = value, error = error)
+}
 
 
 # Load Data ---------------------------------------------------------------
@@ -141,14 +163,21 @@ death_place_labels <- with_progress({
   p <- progressor(steps = nrow(mp_profiles))
   mp_profiles |>
     mutate(
-      Death_Place_llama3 = map_chr(bio_profile_text, \(txt) {
+      llm_result = map2(bio_profile_text, row_number(), \(txt, i) {
         res <- safe_extract_death_place(txt)
+        err <- res$error |>
+          (\(x) if (is.character(x) && length(x) == 1 && !is.na(x) && str_squish(x) != "") x else NA_character_)()
+        if (!is.na(err)) {
+          message(glue("Row {i} ({id_bioguide[i]}) failed: {err}"))
+        }
         p()
         Sys.sleep(0.1)
-        res
-      })
+        list(value = res$value, error = err)
+      }),
+      Death_Place_llama3 = map_chr(llm_result, \(x) x$value),
+      Death_Place_error = map_chr(llm_result, \(x) x$error)
     ) |>
-    select(id_bioguide, Death_Place_llama3)
+    select(id_bioguide, Death_Place_llama3, Death_Place_error)
 })
 
 mp_data_llama3 <- mp_data |>
