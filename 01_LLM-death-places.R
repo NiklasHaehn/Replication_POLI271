@@ -93,6 +93,80 @@ normalize_death_place <- function(x) {
     na_if("")
 }
 
+death_primary_keywords <- c(
+  "died",
+  "passed away",
+  "was killed",
+  "killed",
+  "slain",
+  "deceased"
+)
+
+death_context_keywords <- c(
+  "until his death",
+  "until her death",
+  "his death in",
+  "her death in",
+  "death in",
+  "death at",
+  "death near",
+  "death on"
+)
+
+death_keyword_regex <- regex(
+  str_c(
+    "\\b(",
+    str_c(c(death_primary_keywords, death_context_keywords), collapse = "|"),
+    ")\\b"
+  ),
+  ignore_case = TRUE
+)
+
+death_primary_regex <- regex(
+  str_c("\\b(", str_c(death_primary_keywords, collapse = "|"), ")\\b"),
+  ignore_case = TRUE
+)
+
+death_exclude_regex <- regex(
+  str_c(
+    c(
+      "vacancy caused by the death of",
+      "fill the vacancy caused by the death of",
+      "presumptive death certificate",
+      "death of (the )?(governor|representative|senator|president|speaker)"
+    ),
+    collapse = "|"
+  ),
+  ignore_case = TRUE
+)
+
+extract_death_sentence <- \(txt) {
+  txt_clean <- txt |>
+    coalesce("") |>
+    str_replace_all("[\r\n]+", " ") |>
+    str_squish()
+  
+  if (txt_clean == "") return(NA_character_)
+  
+  segments <- txt_clean |>
+    str_split(";", simplify = FALSE) |>
+    pluck(1) |>
+    str_squish() |>
+    discard(~ .x == "")
+  
+  if (length(segments) == 0) return(NA_character_)
+  
+  candidates <- segments |>
+    keep(~ str_detect(.x, death_keyword_regex) && !str_detect(.x, death_exclude_regex))
+  
+  if (length(candidates) == 0) return(NA_character_)
+  
+  primary_hits <- candidates |> keep(~ str_detect(.x, death_primary_regex))
+  
+  (if (length(primary_hits) > 0) primary_hits[[1]] else candidates[[1]]) |>
+    na_if("")
+}
+
 extract_death_place <- function(txt) {
   if (txt |> coalesce("") |> str_squish() == "") return(NA_character_)
   
@@ -151,8 +225,12 @@ mp_profiles <- mp_data |>
   as.Date(bio_deathday) > as.Date("1970-01-01")
   ) |> 
   distinct(id_bioguide, .keep_all = TRUE) |>
-  transmute(id_bioguide, bio_profile_text) |> 
-  sample_n(50)
+  transmute(
+    id_bioguide,
+    bio_profile_text,
+    bio_profile_death_sentence = map_chr(bio_profile_text, extract_death_sentence)
+  ) |> 
+  filter(!is.na(bio_profile_death_sentence))
 
 handlers(handler_progress(
   format = "[:bar] :percent | ETA: :eta | Row :current/:total",
@@ -163,7 +241,7 @@ death_place_labels <- with_progress({
   p <- progressor(steps = nrow(mp_profiles))
   mp_profiles |>
     mutate(
-      llm_result = map2(bio_profile_text, row_number(), \(txt, i) {
+      llm_result = map2(bio_profile_death_sentence, row_number(), \(txt, i) {
         res <- safe_extract_death_place(txt)
         err <- res$error |>
           (\(x) if (is.character(x) && length(x) == 1 && !is.na(x) && str_squish(x) != "") x else NA_character_)()
@@ -185,4 +263,4 @@ mp_data_llama3 <- mp_data |>
 
 write_csv(mp_data_llama3, "data/fmt/MP_data_llama3.csv", na = "")
 
-print(death_place_labels, n = Inf)
+#print(death_place_labels, n = Inf)
