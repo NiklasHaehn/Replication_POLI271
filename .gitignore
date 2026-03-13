@@ -55,6 +55,6 @@ Renviron.site
 *.pkl
 *.joblib
 
-# Exception
-!MP_data.csv
+# Exceptions
+!data/fmt/Dataset_WithDeathplaces.dta
 .Rproj.user

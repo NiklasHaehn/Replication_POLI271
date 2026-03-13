@@ -5,6 +5,7 @@ library(progressr)
 library(R.utils)
 
 set.seed(1234)
+options(error = NULL)
 
 model_name <- "llama3.2:latest"
 
@@ -38,25 +39,27 @@ Return NA if:
 - no death place is stated
 - only the burial place or cemetery is given
 - the location is ambiguous or unclear
+- city or state is missing
 
 OUTPUT
 Return exactly one value and nothing else:
-- the death place as written in the biography
+- format: {City}, {State}
+- {State} = full U.S. state name (e.g., South Carolina, Missouri, Texas); use District of Columbia for Washington, D.C.
 - or NA
 
 EXAMPLES
 
 Example 1
 Biography: 'died in Washington, D.C., April 10, 1907; interment in Lakeside Cemetery'
-Answer: Washington, D.C.
+Answer: Washington, District of Columbia
 
 Example 2
 Biography: 'died near Lebanon, Wilson County, Tenn., August 19, 1867; interment in Cedar Grove Cemetery'
-Answer: near Lebanon, Wilson County, Tenn.
+Answer: Lebanon, Tennessee
 
 Example 3
 Biography: 'died in St. Louis, Mo., November 20, 1886; interment in Hazelwood Cemetery'
-Answer: St. Louis, Mo.
+Answer: St. Louis, Missouri
 
 Example 4
 Biography: 'elected to the One Hundred Second and to the seventeen succeeding Congresses (January 3, 1991-present)'
@@ -68,8 +71,11 @@ Answer: NA
 
 BIOGRAPHY
 \"\"\"
-{txt}
+<<txt>>
 \"\"\""
+    ,
+    .open = "<<",
+    .close = ">>"
   )
 }
 
@@ -181,37 +187,73 @@ extract_death_place <- function(txt) {
     normalize_death_place()
 }
 
-safe_extract_death_place <- \(txt) {
-  out <- tryCatch(
-    list(
-      value = withTimeout(
-        extract_death_place(txt),
-        timeout = 90,
-        onTimeout = "error"
-      ),
-      error = NA_character_
+llm_prompt_echo_regex <- regex(
+  str_c(
+    c(
+      "^\\s*#\\s*extracting place of death",
+      "extracting place of death from u\\.s\\. house of representatives biographies",
+      "^\\s*##\\s*task\\b",
+      "you extract the place of death from biographies",
+      "def extract_death_place\\(biography\\)\\: if "
     ),
-    TimeoutException = \(e) list(value = NA_character_, error = conditionMessage(e)),
-    interrupt = \(e) list(value = NA_character_, error = conditionMessage(e)),
-    error = \(e) list(value = NA_character_, error = conditionMessage(e))
-  )
+    collapse = "|"
+  ),
+  ignore_case = TRUE
+)
+
+safe_extract_death_place <- \(txt, max_tries = 3, timeout_sec = 9) {
+  last_error <- NA_character_
   
-  if (!is.list(out) || !all(c("value", "error") %in% names(out))) {
-    return(list(value = NA_character_, error = "invalid result structure"))
+  for (attempt in seq_len(max_tries)) {
+    base::setTimeLimit(cpu = Inf, elapsed = Inf, transient = FALSE)
+    
+    out <- tryCatch(
+      {
+        value <- withTimeout(
+          extract_death_place(txt),
+          timeout = timeout_sec,
+          elapsed = timeout_sec,
+          onTimeout = "silent"
+        )
+        list(
+          value = if (is.null(value)) NA_character_ else value,
+          error = if (is.null(value)) "timeout" else NA_character_
+        )
+      },
+      interrupt = \(e) list(value = NA_character_, error = conditionMessage(e)),
+      error = \(e) list(value = NA_character_, error = conditionMessage(e)),
+      finally = base::setTimeLimit(cpu = Inf, elapsed = Inf, transient = FALSE)
+    )
+    
+    if (!is.list(out) || !all(c("value", "error") %in% names(out))) {
+      last_error <- "invalid result structure"
+      next
+    }
+    
+    value <- out$value
+    value <- if (is.character(value) && length(value) == 1) value else NA_character_
+    
+    error <- out$error
+    error <- if (
+      is.character(error) &&
+        length(error) == 1 &&
+        !is.na(error) &&
+        str_squish(error) != ""
+    ) error else NA_character_
+    
+    is_prompt_echo <- !is.na(value) && str_detect(value, llm_prompt_echo_regex)
+    
+    if (is_prompt_echo) {
+      last_error <- "prompt_echo"
+      next
+    }
+    
+    if (!is.na(value)) return(list(value = value, error = NA_character_))
+    
+    last_error <- if (!is.na(error)) error else "NA_result"
   }
   
-  value <- out$value
-  value <- if (is.character(value) && length(value) == 1) value else NA_character_
-  
-  error <- out$error
-  error <- if (
-    is.character(error) &&
-      length(error) == 1 &&
-      !is.na(error) &&
-      str_squish(error) != ""
-  ) error else NA_character_
-  
-  list(value = value, error = error)
+  list(value = NA_character_, error = glue("retry_exhausted: {last_error}"))
 }
 
 
@@ -221,9 +263,9 @@ mp_data <- read_csv("data/raw/MP_data/MP_data.csv", show_col_types = FALSE)
 
 mp_profiles <- mp_data |>
   filter(
-    !is.na(bio_deathday) | 
-  as.Date(bio_deathday) > as.Date("1970-01-01")
-  ) |> 
+    !is.na(bio_deathday) &
+    as.Date(bio_deathday) > as.Date("1970-01-01")
+  ) |>
   distinct(id_bioguide, .keep_all = TRUE) |>
   transmute(
     id_bioguide,
@@ -242,12 +284,17 @@ death_place_labels <- with_progress({
   mp_profiles |>
     mutate(
       llm_result = map2(bio_profile_death_sentence, row_number(), \(txt, i) {
-        res <- safe_extract_death_place(txt)
+        res <- tryCatch(
+          safe_extract_death_place(txt),
+          interrupt = \(e) list(value = NA_character_, error = conditionMessage(e)),
+          error = \(e) list(value = NA_character_, error = conditionMessage(e))
+        )
+        
         err <- res$error |>
           (\(x) if (is.character(x) && length(x) == 1 && !is.na(x) && str_squish(x) != "") x else NA_character_)()
-        if (!is.na(err)) {
-          message(glue("Row {i} ({id_bioguide[i]}) failed: {err}"))
-        }
+        
+        if (!is.na(err)) message(glue("Row {i} ({id_bioguide[i]}) failed: {err}"))
+        
         p()
         Sys.sleep(0.1)
         list(value = res$value, error = err)
@@ -262,5 +309,6 @@ mp_data_llama3 <- mp_data |>
   left_join(death_place_labels, by = "id_bioguide")
 
 write_csv(mp_data_llama3, "data/fmt/MP_data_llama3.csv", na = "")
+write_csv(death_place_labels, "data/fmt/MP_deathplaces_NH.csv")
 
 #print(death_place_labels, n = Inf)
