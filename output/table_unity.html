@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+
+
+</head>
+<body>
+<div id="htgesjnote" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+  <style>#htgesjnote table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#htgesjnote thead, #htgesjnote tbody, #htgesjnote tfoot, #htgesjnote tr, #htgesjnote td, #htgesjnote th {
+  border-style: none;
+}
+
+#htgesjnote p {
+  margin: 0;
+  padding: 0;
+}
+
+#htgesjnote .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#htgesjnote .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#htgesjnote .gt_title {
+  color: #333333;
+  font-size: 13px;
+  font-weight: bold;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#htgesjnote .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#htgesjnote .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#htgesjnote .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#htgesjnote .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#htgesjnote .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#htgesjnote .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#htgesjnote .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#htgesjnote .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#htgesjnote .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#htgesjnote .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#htgesjnote .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#htgesjnote .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#htgesjnote .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#htgesjnote .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#htgesjnote .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#htgesjnote .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#htgesjnote .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#htgesjnote .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#htgesjnote .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#htgesjnote .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#htgesjnote .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#htgesjnote .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#htgesjnote .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#htgesjnote .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#htgesjnote .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#htgesjnote .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#htgesjnote .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#htgesjnote .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#htgesjnote .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#htgesjnote .gt_footnote {
+  margin: 0px;
+  font-size: 10px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#htgesjnote .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#htgesjnote .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#htgesjnote .gt_left {
+  text-align: left;
+}
+
+#htgesjnote .gt_center {
+  text-align: center;
+}
+
+#htgesjnote .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#htgesjnote .gt_font_normal {
+  font-weight: normal;
+}
+
+#htgesjnote .gt_font_bold {
+  font-weight: bold;
+}
+
+#htgesjnote .gt_font_italic {
+  font-style: italic;
+}
+
+#htgesjnote .gt_super {
+  font-size: 65%;
+}
+
+#htgesjnote .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#htgesjnote .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#htgesjnote .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#htgesjnote .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#htgesjnote .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#htgesjnote .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#htgesjnote .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#htgesjnote .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#htgesjnote div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <!--/html_preserve--><caption class='gt_caption'>Local Roots and Party Unity</caption><!--html_preserve-->
+  <thead>
+    <tr class="gt_col_headings gt_spanner_row">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="font-weight: bold;" scope="col" id="a-"> </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" style="font-weight: bold;" scope="colgroup" id="**Original**">
+        <div class="gt_column_spanner"><span class='gt_from_md'><strong>Original</strong></span></div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" style="font-weight: bold;" scope="colgroup" id="**Original (Restricted)**">
+        <div class="gt_column_spanner"><span class='gt_from_md'><strong>Original (Restricted)</strong></span></div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" style="font-weight: bold;" scope="colgroup" id="**Death Place**">
+        <div class="gt_column_spanner"><span class='gt_from_md'><strong>Death Place</strong></span></div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" style="font-weight: bold;" scope="colgroup" id="**Pooled**">
+        <div class="gt_column_spanner"><span class='gt_from_md'><strong>Pooled</strong></span></div>
+      </th>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Birth-(Binary)">(Binary)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Birth-(Log.-Distance)">(Log. Distance)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Birth,-Restricted-(Binary)">(Binary)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Birth,-Restricted-(Log.-Distance)">(Log. Distance)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Death-Place-(Binary)">(Binary)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Death-Place-(Log.-Distance)">(Log. Distance)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Pooled-(Binary)">(Binary)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Pooled-(Log.-Distance)">(Log. Distance)</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers=" " class="gt_row gt_left">Birth in District (0/1)</td>
+<td headers="Birth (Binary)" class="gt_row gt_center">-1.442*</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">-0.790</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Death Place (Binary)" class="gt_row gt_center"></td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">-7.809</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center"></td></tr>
+    <tr><td headers=" " class="gt_row gt_left"></td>
+<td headers="Birth (Binary)" class="gt_row gt_center">(0.851)</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">(5.335)</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Death Place (Binary)" class="gt_row gt_center"></td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">(6.277)</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center"></td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Log(Birth Distance + 1)</td>
+<td headers="Birth (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">0.331**</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">0.710</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center"></td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Pooled (Binary)" class="gt_row gt_center"></td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">0.103</td></tr>
+    <tr><td headers=" " class="gt_row gt_left"></td>
+<td headers="Birth (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">(0.133)</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">(0.776)</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center"></td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Pooled (Binary)" class="gt_row gt_center"></td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">(1.204)</td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Death in District (0/1)</td>
+<td headers="Birth (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">5.491</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">2.511</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center"></td></tr>
+    <tr><td headers=" " class="gt_row gt_left"></td>
+<td headers="Birth (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">(3.644)</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">(4.653)</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center"></td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Log(Death Distance + 1)</td>
+<td headers="Birth (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Death Place (Binary)" class="gt_row gt_center"></td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">-0.102</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center"></td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">-0.806</td></tr>
+    <tr><td headers=" " class="gt_row gt_left"></td>
+<td headers="Birth (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Death Place (Binary)" class="gt_row gt_center"></td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">(0.585)</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center"></td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">(0.729)</td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Birth × Death in District</td>
+<td headers="Birth (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Death Place (Binary)" class="gt_row gt_center"></td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">8.716</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center"></td></tr>
+    <tr><td headers=" " class="gt_row gt_left"></td>
+<td headers="Birth (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Death Place (Binary)" class="gt_row gt_center"></td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">(6.835)</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center"></td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Log(Birth) × Log(Death)</td>
+<td headers="Birth (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Death Place (Binary)" class="gt_row gt_center"></td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Pooled (Binary)" class="gt_row gt_center"></td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">0.178</td></tr>
+    <tr><td headers=" " class="gt_row gt_left"></td>
+<td headers="Birth (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center"></td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Death Place (Binary)" class="gt_row gt_center"></td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center"></td>
+<td headers="Pooled (Binary)" class="gt_row gt_center"></td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">(0.198)</td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Democrat</td>
+<td headers="Birth (Binary)" class="gt_row gt_center">-1.710</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">-1.689</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">-11.639**</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">-11.231**</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">-13.296**</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">-11.953**</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">-13.231**</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">-11.496**</td></tr>
+    <tr><td headers=" " class="gt_row gt_left"></td>
+<td headers="Birth (Binary)" class="gt_row gt_center">(1.055)</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">(1.051)</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">(5.454)</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">(5.131)</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">(5.329)</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">(5.266)</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">(5.329)</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">(5.249)</td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Seniority</td>
+<td headers="Birth (Binary)" class="gt_row gt_center">-0.191**</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">-0.189**</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">0.206</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">0.258</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">0.103</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">0.195</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">0.132</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">0.346</td></tr>
+    <tr><td headers=" " class="gt_row gt_left"></td>
+<td headers="Birth (Binary)" class="gt_row gt_center">(0.062)</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">(0.062)</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">(0.301)</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">(0.337)</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">(0.304)</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">(0.355)</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">(0.268)</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">(0.364)</td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Majority Party</td>
+<td headers="Birth (Binary)" class="gt_row gt_center">4.202**</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">4.192**</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">5.171**</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">5.151**</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">5.159**</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">5.174**</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">5.120**</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">5.108**</td></tr>
+    <tr><td headers=" " class="gt_row gt_left"></td>
+<td headers="Birth (Binary)" class="gt_row gt_center">(0.299)</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">(0.300)</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">(1.038)</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">(1.042)</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">(1.024)</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">(1.046)</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">(1.035)</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">(1.057)</td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Power Committee Member</td>
+<td headers="Birth (Binary)" class="gt_row gt_center">0.987**</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">0.974**</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">-1.476</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">-1.521</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">-0.986</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">-1.389</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">-0.865</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">-1.709</td></tr>
+    <tr><td headers=" " class="gt_row gt_left"></td>
+<td headers="Birth (Binary)" class="gt_row gt_center">(0.470)</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">(0.469)</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">(1.529)</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">(1.542)</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">(1.626)</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">(1.674)</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">(1.580)</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">(1.735)</td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Committee Chair</td>
+<td headers="Birth (Binary)" class="gt_row gt_center">0.974*</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">0.979*</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">-0.259</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">-0.351</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">-0.220</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">-0.229</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">-0.396</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">-0.311</td></tr>
+    <tr><td headers=" " class="gt_row gt_left"></td>
+<td headers="Birth (Binary)" class="gt_row gt_center">(0.534)</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">(0.536)</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">(0.840)</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">(0.853)</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">(0.856)</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">(0.871)</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">(0.837)</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">(0.860)</td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Female</td>
+<td headers="Birth (Binary)" class="gt_row gt_center">-1.262</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">-1.348</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">15.547*</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">16.166**</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">12.115</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">15.661*</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">14.307</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">16.618**</td></tr>
+    <tr><td headers=" " class="gt_row gt_left"></td>
+<td headers="Birth (Binary)" class="gt_row gt_center">(0.884)</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">(0.881)</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">(8.969)</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">(7.548)</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">(10.854)</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">(9.138)</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">(10.746)</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">(8.435)</td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Presidential Vote Share (Co-partisan)</td>
+<td headers="Birth (Binary)" class="gt_row gt_center">20.876**</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">20.878**</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">4.163</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">4.270</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">4.296</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">4.051</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">4.186</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">4.271</td></tr>
+    <tr><td headers=" " class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;"></td>
+<td headers="Birth (Binary)" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(3.035)</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(3.028)</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(6.128)</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(6.035)</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(5.785)</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(6.062)</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(5.730)</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(6.016)</td></tr>
+    <tr><td headers=" " class="gt_row gt_left">Observations</td>
+<td headers="Birth (Binary)" class="gt_row gt_center">10069</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">10069</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">1649</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">1649</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">1649</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">1649</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">1649</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">1649</td></tr>
+    <tr><td headers=" " class="gt_row gt_left">R²</td>
+<td headers="Birth (Binary)" class="gt_row gt_center">0.825</td>
+<td headers="Birth (Log. Distance)" class="gt_row gt_center">0.825</td>
+<td headers="Birth, Restricted (Binary)" class="gt_row gt_center">0.912</td>
+<td headers="Birth, Restricted (Log. Distance)" class="gt_row gt_center">0.912</td>
+<td headers="Death Place (Binary)" class="gt_row gt_center">0.913</td>
+<td headers="Death Place (Log. Distance)" class="gt_row gt_center">0.912</td>
+<td headers="Pooled (Binary)" class="gt_row gt_center">0.914</td>
+<td headers="Pooled (Log. Distance)" class="gt_row gt_center">0.912</td></tr>
+  </tbody>
+  <tfoot>
+    <tr class="gt_sourcenotes">
+      <td class="gt_sourcenote" colspan="9">* p &lt; 0.1, ** p &lt; 0.05</td>
+    </tr>
+    <tr class="gt_sourcenotes">
+      <td class="gt_sourcenote" colspan="9">OLS estimates with district-clustered standard errors in parentheses. District and Congress fixed effects included in all models. Columns (1)–(2): full sample. Columns (3)–(8): restricted to legislators with geocoded death place. Dependent variable: party unity score. * p &lt; 0.10, ** p &lt; 0.05.</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</body>
+</html>
