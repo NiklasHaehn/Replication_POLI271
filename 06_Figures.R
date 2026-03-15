@@ -2,6 +2,7 @@ library(tidyverse)
 library(haven)
 library(fixest)
 library(broom)
+library(nnet)
 library(cowplot)
 library(scales)
 
@@ -134,7 +135,99 @@ ggsave("output/fig_coef_plot.pdf", fig_coef, width = 10, height = 5, dpi = 600)
 ggsave("output/fig_coef_plot.png", fig_coef, width = 10, height = 5, dpi = 300)
 print(fig_coef)
 
-# Figure 2: Scatter Birth vs. Death Distance by Party --------------------
+# Figure 2: Coefficient Plot – Legislative Style --------------------------
+# Multinomial logit: same three specs as Figure 1, but outcome is legislative
+# style (Party Focused baseline; District Focused and Policy Focused shown).
+# Congress factor variable replaces district/congress FEs (not available in
+# multinom). Wald CIs: estimate ± 1.96 * std.error.
+
+style_controls <- "dem + seniority + majority + power + chair + female + inpres + congress"
+
+df_style <- df |>
+  drop_na(style3, dem, seniority, majority, power, chair, female, inpres, congress) |>
+  mutate(
+    congress      = as.factor(congress),
+    style_labeled = factor(style3, levels = c(1, 2, 3),
+                           labels = c("Party Focused", "District Focused", "Policy Focused"))
+  )
+
+df_style_death <- df_style |> filter(!is.na(death_binary))
+
+# Helper: fit multinom and return tidy rows for one key term
+extract_coef_style <- function(rhs, key_term, data, spec_label, facet_label) {
+  m <- multinom(
+    as.formula(paste0("style_labeled ~ ", rhs, " + ", style_controls)),
+    data  = data,
+    trace = FALSE
+  )
+  tidy(m) |>
+    filter(term == key_term) |>
+    transmute(
+      response  = y.level,
+      spec      = spec_label,
+      facet     = facet_label,
+      estimate,
+      conf.low  = estimate - 1.96 * std.error,
+      conf.high = estimate + 1.96 * std.error
+    )
+}
+
+# Build coefficient data for both binary and log-distance facets
+style_coef_rows <- bind_rows(
+  # Binary facet
+  extract_coef_style("binary",           "binary",           df_style,       "Birth (Original)",   "Binary (0/1)"),
+  extract_coef_style("binary",           "binary",           df_style_death, "Birth (Restricted)", "Binary (0/1)"),
+  extract_coef_style("death_binary",     "death_binary",     df_style_death, "Death Place",        "Binary (0/1)"),
+  # Log-distance facet
+  extract_coef_style("logged_distance",  "logged_distance",  df_style,       "Birth (Original)",   "Log Distance"),
+  extract_coef_style("logged_distance",  "logged_distance",  df_style_death, "Birth (Restricted)", "Log Distance"),
+  extract_coef_style("death_logged_dist","death_logged_dist",df_style_death, "Death Place",        "Log Distance")
+) |>
+  mutate(
+    spec     = factor(spec,     levels = names(SPEC_PAL)),
+    response = factor(response, levels = rev(c("District Focused", "Policy Focused"))),
+    facet    = factor(facet,    levels = c("Binary (0/1)", "Log Distance"))
+  )
+
+fig_coef_style <- ggplot(
+  style_coef_rows,
+  aes(
+    x      = estimate,
+    xmin   = conf.low,
+    xmax   = conf.high,
+    y      = response,
+    colour = spec,
+    shape  = spec
+  )
+) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey40", linewidth = 0.4) +
+  geom_pointrange(
+    position = position_dodge(width = 0.55),
+    linewidth = 0.55,
+    size      = 0.45
+  ) +
+  scale_colour_manual(values = SPEC_PAL, name = NULL) +
+  scale_shape_manual(values  = SPEC_SHAPE, name = NULL) +
+  facet_wrap(~facet, scales = "free_x") +
+  labs(
+    title    = "Local Roots and Legislative Style: Coefficient Estimates (95% CI)",
+    subtitle = "Multinomial logit relative to 'Party Focused' baseline. Wald CIs.",
+    x        = "Coefficient Estimate",
+    y        = NULL
+  ) +
+  theme_classic() +
+  theme(
+    legend.position    = "bottom",
+    strip.text         = element_text(hjust = 0, face = "bold"),
+    strip.background   = element_blank(),
+    panel.spacing      = unit(1.2, "lines")
+  )
+
+ggsave("output/fig_coef_style.pdf", fig_coef_style, width = 10, height = 4, dpi = 600)
+ggsave("output/fig_coef_style.png", fig_coef_style, width = 10, height = 4, dpi = 300)
+print(fig_coef_style)
+
+# Figure 3: Scatter Birth vs. Death Distance by Party --------------------
 # One observation per legislator (last congress served in death-place sub-sample).
 # Colour distinguishes party affiliation.
 
@@ -169,7 +262,7 @@ ggsave("output/fig_scatter_birth_death.pdf", fig_scatter, width = 7, height = 6,
 ggsave("output/fig_scatter_birth_death.png", fig_scatter, width = 7, height = 6, dpi = 300)
 print(fig_scatter)
 
-# Figure 3: Birth vs. Death Distance Over Time (Comparison) ---------------
+# Figure 4: Birth vs. Death Distance Over Time (Comparison) ---------------
 
 collapsed_birth_93 <- df_overtime |>
   filter(congress >= 93) |>
