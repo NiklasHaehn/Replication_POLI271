@@ -1,0 +1,39 @@
+\begin{table}[t]
+\caption{Local Roots and Legislative Style: Log(Miles Born from District + 1)} 
+\fontsize{7.0pt}{8.0pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{\dimexpr 46.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 46.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 46.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 46.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 46.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 46.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 46.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 46.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 46.50pt -2\tabcolsep-1.5\arrayrulewidth}}
+\toprule
+ & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 93.00pt -2\tabcolsep-1.5\arrayrulewidth}}{{\bfseries Original    }} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 93.00pt -2\tabcolsep-1.5\arrayrulewidth}}{{\bfseries Orig. (Restr.)    }} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 93.00pt -2\tabcolsep-1.5\arrayrulewidth}}{{\bfseries Death Place    }} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 93.00pt -2\tabcolsep-1.5\arrayrulewidth}}{{\bfseries Pooled    }} \\ 
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(lr){8-9}
+{\bfseries  } & {\bfseries Dist. Focused} & {\bfseries Policy Focused} & {\bfseries Dist. Focused} & {\bfseries Policy Focused} & {\bfseries Dist. Focused} & {\bfseries Policy Focused} & {\bfseries Dist. Focused} & {\bfseries Policy Focused} \\ 
+\midrule\addlinespace[2.5pt]
+Log(Birth Distance + 1) & -0.127** & -0.073** & -0.200** & -0.148** &  &  & -0.101 & -0.133** \\ 
+ & (0.016) & (0.013) & (0.045) & (0.037) &  &  & (0.076) & (0.065) \\ 
+Log(Death Distance + 1) &  &  &  &  & -0.317** & -0.074* & -0.216** & -0.032 \\ 
+ &  &  &  &  & (0.057) & (0.040) & (0.086) & (0.068) \\ 
+Log(Birth) $\times$ Log(Death) &  &  &  &  &  &  & -0.024 & -0.001 \\ 
+ &  &  &  &  &  &  & (0.022) & (0.014) \\ 
+Democrat & -0.247** & 0.055 & -0.662** & 0.200 & -0.936** & 0.051 & -0.800** & 0.194 \\ 
+ & (0.088) & (0.078) & (0.245) & (0.214) & (0.251) & (0.209) & (0.258) & (0.218) \\ 
+Seniority & 0.041** & 0.035** & -0.073** & -0.023 & -0.054* & -0.029 & -0.055* & -0.024 \\ 
+ & (0.012) & (0.011) & (0.029) & (0.024) & (0.028) & (0.024) & (0.028) & (0.024) \\ 
+Majority Party & -0.448** & -0.077 & 0.001 & 0.050 & 0.043 & 0.111 & -0.025 & 0.047 \\ 
+ & (0.092) & (0.080) & (0.252) & (0.220) & (0.256) & (0.217) & (0.260) & (0.221) \\ 
+Power Committee Member & -0.006 & 0.112 & 0.928** & -0.164 & 0.876** & -0.251 & 1.071** & -0.131 \\ 
+ & (0.100) & (0.085) & (0.275) & (0.244) & (0.271) & (0.241) & (0.281) & (0.247) \\ 
+Committee Chair & -1.186** & -0.667** & -1.040** & -1.043** & -1.064** & -1.043** & -0.963** & -1.041** \\ 
+ & (0.243) & (0.179) & (0.487) & (0.423) & (0.484) & (0.420) & (0.489) & (0.423) \\ 
+Female & 0.146 & 0.168 & -1.100** & 0.014 & -1.165** & -0.208 & -1.016** & -0.041 \\ 
+ & (0.147) & (0.116) & (0.433) & (0.286) & (0.407) & (0.278) & (0.425) & (0.300) \\ 
+Presidential Vote Share (Co-partisan) & -10.585** & 1.963** & -10.588** & 0.790 & -10.982** & 0.844 & -11.135** & 0.745 \\ 
+{} & {(0.538)} & {(0.364)} & {(1.362)} & {(0.927)} & {(1.401)} & {(0.919)} & {(1.426)} & {(0.938)} \\ 
+Observations & 4273 &  & 638 &  & 638 &  & 638 &  \\ 
+\bottomrule
+\end{tabular*}
+\begin{minipage}{\linewidth}
+\vspace{.05em}
+* p < 0.1, ** p < 0.05\\
+Multinomial logit estimates with standard errors in parentheses. Congress included as a factor variable (no district FE). Coefficients relative to 'Party Focused' baseline. 'Original': full sample. 'Orig. (Restr.)' / 'Death Place' / 'Pooled': death-place sub-sample. * p < 0.10, ** p < 0.05.\\
+\end{minipage}
+\end{table}
+

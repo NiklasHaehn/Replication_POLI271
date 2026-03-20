@@ -1,0 +1,46 @@
+\begin{table}[t]
+\caption{Local Roots and Constituency Staff Allocation} 
+\fontsize{9.0pt}{11.0pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccccccc}
+\toprule
+ & \multicolumn{2}{c}{{\bfseries \textbf{Original}}} & \multicolumn{2}{c}{{\bfseries \textbf{Original (Restricted)}}} & \multicolumn{2}{c}{{\bfseries \textbf{Death Place}}} & \multicolumn{2}{c}{{\bfseries \textbf{Pooled}}} \\ 
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(lr){8-9}
+{\bfseries  } & {\bfseries (Binary)} & {\bfseries (Log. Distance)} & {\bfseries (Binary)} & {\bfseries (Log. Distance)} & {\bfseries (Binary)} & {\bfseries (Log. Distance)} & {\bfseries (Binary)} & {\bfseries (Log. Distance)} \\ 
+\midrule\addlinespace[2.5pt]
+Birth in District (0/1) & 1.178 &  & -9.318 &  &  &  & -5.372 &  \\ 
+ & (0.984) &  & (5.992) &  &  &  & (10.456) &  \\ 
+Log(Birth Distance + 1) &  & -0.314** &  & 1.874** &  &  &  & 0.475 \\ 
+ &  & (0.152) &  & (0.477) &  &  &  & (1.151) \\ 
+Death in District (0/1) &  &  &  &  & -3.929 &  & -11.856** &  \\ 
+ &  &  &  &  & (2.434) &  & (3.382) &  \\ 
+Log(Death Distance + 1) &  &  &  &  &  & 0.603 &  & -0.038 \\ 
+ &  &  &  &  &  & (0.751) &  & (0.459) \\ 
+Birth × Death in District &  &  &  &  &  &  & 12.185** &  \\ 
+ &  &  &  &  &  &  & (2.812) &  \\ 
+Log(Birth) × Log(Death) &  &  &  &  &  &  &  & 0.297 \\ 
+ &  &  &  &  &  &  &  & (0.185) \\ 
+Democrat & -0.880 & -0.976 &  &  &  &  &  &  \\ 
+ & (0.905) & (0.900) &  &  &  &  &  &  \\ 
+Seniority & -0.393** & -0.393** & -2.164** & -2.063** & -1.728** & -1.723** & -1.812** & -1.783** \\ 
+ & (0.105) & (0.104) & (0.479) & (0.253) & (0.252) & (0.296) & (0.524) & (0.324) \\ 
+Majority Party & 0.076 & 0.065 & 0.573 & 0.474 & 0.626 & 0.687 & 0.435 & 0.435 \\ 
+ & (0.354) & (0.354) & (0.965) & (0.965) & (0.962) & (0.980) & (0.997) & (0.997) \\ 
+Power Committee Member & 0.837 & 0.886 & -7.129** & -6.987** & -7.594** & -7.567** & -6.739* & -6.739* \\ 
+ & (0.738) & (0.736) & (3.133) & (3.090) & (3.219) & (3.527) & (3.532) & (3.532) \\ 
+Committee Chair & 1.711 & 1.719 & 0.092 & 0.043 & -0.023 & -0.116 & -0.017 & -0.017 \\ 
+ & (1.047) & (1.047) & (2.850) & (2.854) & (2.851) & (2.872) & (2.901) & (2.901) \\ 
+Female & 0.282 & 0.453 & -24.601** & -22.722** & -10.812** & -10.568** & -4.194 & -14.983* \\ 
+ & (1.075) & (1.080) & (12.421) & (6.003) & (4.755) & (5.110) & (15.432) & (8.754) \\ 
+Presidential Vote Share (Co-partisan) & -4.658 & -4.654 & -17.546 & -17.457 & -18.243 & -20.505 & -18.706 & -18.706 \\ 
+{} & {(4.483)} & {(4.457)} & {(24.330)} & {(23.993)} & {(24.066)} & {(23.798)} & {(24.526)} & {(24.526)} \\ 
+Observations & 3700 & 3700 & 368 & 368 & 368 & 368 & 368 & 368 \\ 
+R² & 0.673 & 0.674 & 0.792 & 0.792 & 0.792 & 0.791 & 0.793 & 0.793 \\ 
+\bottomrule
+\end{tabular*}
+\begin{minipage}{\linewidth}
+\vspace{.05em}
+* p < 0.1, ** p < 0.05\\
+OLS estimates with district-clustered standard errors in parentheses. District and Congress fixed effects included in all models. Columns (1)–(2): full sample. Columns (3)–(8): restricted to legislators with geocoded death place. Dependent variable: percent of staff allocated to constituency service. * p < 0.10, ** p < 0.05.\\
+\end{minipage}
+\end{table}
+
