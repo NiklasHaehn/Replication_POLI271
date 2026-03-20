@@ -1,0 +1,46 @@
+\begin{table}[t]
+\caption{Local Roots and Party Unity} 
+\fontsize{9.0pt}{11.0pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccccccc}
+\toprule
+ & \multicolumn{2}{c}{{\bfseries \textbf{Original}}} & \multicolumn{2}{c}{{\bfseries \textbf{Original (Restricted)}}} & \multicolumn{2}{c}{{\bfseries \textbf{Death Place}}} & \multicolumn{2}{c}{{\bfseries \textbf{Pooled}}} \\ 
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(lr){8-9}
+{\bfseries  } & {\bfseries (Binary)} & {\bfseries (Log. Distance)} & {\bfseries (Binary)} & {\bfseries (Log. Distance)} & {\bfseries (Binary)} & {\bfseries (Log. Distance)} & {\bfseries (Binary)} & {\bfseries (Log. Distance)} \\ 
+\midrule\addlinespace[2.5pt]
+Birth in District (0/1) & -1.442* &  & -0.790 &  &  &  & -7.809 &  \\ 
+ & (0.851) &  & (5.335) &  &  &  & (6.277) &  \\ 
+Log(Birth Distance + 1) &  & 0.331** &  & 0.710 &  &  &  & 0.103 \\ 
+ &  & (0.133) &  & (0.776) &  &  &  & (1.204) \\ 
+Death in District (0/1) &  &  &  &  & 5.491 &  & 2.511 &  \\ 
+ &  &  &  &  & (3.644) &  & (4.653) &  \\ 
+Log(Death Distance + 1) &  &  &  &  &  & -0.102 &  & -0.806 \\ 
+ &  &  &  &  &  & (0.585) &  & (0.729) \\ 
+Birth × Death in District &  &  &  &  &  &  & 8.716 &  \\ 
+ &  &  &  &  &  &  & (6.835) &  \\ 
+Log(Birth) × Log(Death) &  &  &  &  &  &  &  & 0.178 \\ 
+ &  &  &  &  &  &  &  & (0.198) \\ 
+Democrat & -1.710 & -1.689 & -11.639** & -11.231** & -13.296** & -11.953** & -13.231** & -11.496** \\ 
+ & (1.055) & (1.051) & (5.454) & (5.131) & (5.329) & (5.266) & (5.329) & (5.249) \\ 
+Seniority & -0.191** & -0.189** & 0.206 & 0.258 & 0.103 & 0.195 & 0.132 & 0.346 \\ 
+ & (0.062) & (0.062) & (0.301) & (0.337) & (0.304) & (0.355) & (0.268) & (0.364) \\ 
+Majority Party & 4.202** & 4.192** & 5.171** & 5.151** & 5.159** & 5.174** & 5.120** & 5.108** \\ 
+ & (0.299) & (0.300) & (1.038) & (1.042) & (1.024) & (1.046) & (1.035) & (1.057) \\ 
+Power Committee Member & 0.987** & 0.974** & -1.476 & -1.521 & -0.986 & -1.389 & -0.865 & -1.709 \\ 
+ & (0.470) & (0.469) & (1.529) & (1.542) & (1.626) & (1.674) & (1.580) & (1.735) \\ 
+Committee Chair & 0.974* & 0.979* & -0.259 & -0.351 & -0.220 & -0.229 & -0.396 & -0.311 \\ 
+ & (0.534) & (0.536) & (0.840) & (0.853) & (0.856) & (0.871) & (0.837) & (0.860) \\ 
+Female & -1.262 & -1.348 & 15.547* & 16.166** & 12.115 & 15.661* & 14.307 & 16.618** \\ 
+ & (0.884) & (0.881) & (8.969) & (7.548) & (10.854) & (9.138) & (10.746) & (8.435) \\ 
+Presidential Vote Share (Co-partisan) & 20.876** & 20.878** & 4.163 & 4.270 & 4.296 & 4.051 & 4.186 & 4.271 \\ 
+{} & {(3.035)} & {(3.028)} & {(6.128)} & {(6.035)} & {(5.785)} & {(6.062)} & {(5.730)} & {(6.016)} \\ 
+Observations & 10069 & 10069 & 1649 & 1649 & 1649 & 1649 & 1649 & 1649 \\ 
+R² & 0.825 & 0.825 & 0.912 & 0.912 & 0.913 & 0.912 & 0.914 & 0.912 \\ 
+\bottomrule
+\end{tabular*}
+\begin{minipage}{\linewidth}
+\vspace{.05em}
+* p < 0.1, ** p < 0.05\\
+OLS estimates with district-clustered standard errors in parentheses. District and Congress fixed effects included in all models. Columns (1)–(2): full sample. Columns (3)–(8): restricted to legislators with geocoded death place. Dependent variable: party unity score. * p < 0.10, ** p < 0.05.\\
+\end{minipage}
+\end{table}
+

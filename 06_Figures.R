@@ -66,7 +66,7 @@ SPEC_SHAPE <- c(
 # Helper: run one model and return tidy row with spec/outcome/facet labels
 extract_coef <- function(outcome, rhs, key_term, data, spec_label, facet_label) {
   m <- feols(fml(outcome, rhs), data = data, cluster = ~districtID)
-  tidy(m, conf.int = TRUE) |>
+  tidy(m, conf.int = TRUE, conf.level = 0.90) |>
     filter(term == key_term) |>
     transmute(
       outcome    = OUTCOMES[[outcome]],
@@ -119,7 +119,7 @@ fig_coef <- ggplot(
   scale_shape_manual(values  = SPEC_SHAPE, name = NULL) +
   facet_wrap(~facet, scales = "free_x") +
   labs(
-    title = "Local Roots and Legislative Behaviour: Coefficient Estimates (95% CI)",
+    title = "Local Roots and Legislative Behaviour: Coefficient Estimates (90% CI)",
     x     = "Coefficient Estimate",
     y     = NULL
   ) +
@@ -167,8 +167,8 @@ extract_coef_style <- function(rhs, key_term, data, spec_label, facet_label) {
       spec      = spec_label,
       facet     = facet_label,
       estimate,
-      conf.low  = estimate - 1.96 * std.error,
-      conf.high = estimate + 1.96 * std.error
+      conf.low  = estimate - 1.645 * std.error,
+      conf.high = estimate + 1.645 * std.error
     )
 }
 
@@ -210,8 +210,8 @@ fig_coef_style <- ggplot(
   scale_shape_manual(values  = SPEC_SHAPE, name = NULL) +
   facet_wrap(~facet, scales = "free_x") +
   labs(
-    title    = "Local Roots and Legislative Style: Coefficient Estimates (95% CI)",
-    subtitle = "Multinomial logit relative to 'Party Focused' baseline. Wald CIs.",
+    title    = "Local Roots and Legislative Style: Coefficient Estimates (90% CI)",
+    subtitle = "Multinomial logit relative to 'Party Focused' baseline. Wald 90% CIs.",
     x        = "Coefficient Estimate",
     y        = NULL
   ) +

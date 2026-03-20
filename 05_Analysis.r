@@ -267,12 +267,9 @@ gtsave(tbl_unity,  "output/table_unity.html")
 gtsave(tbl_cospon, "output/table_cospon.html")
 # Style tables are saved further below after models_style is defined.
 #
-# For LaTeX (uncomment as needed):
-# gtsave(tbl_staff,       "output/table_staff.tex")
-# gtsave(tbl_unity,       "output/table_unity.tex")
-# gtsave(tbl_cospon,      "output/table_cospon.tex")
-# gtsave(tbl_style_bin,   "output/table_style_binary.tex")
-# gtsave(tbl_style_log,   "output/table_style_log.tex")
+gtsave(tbl_staff,  "output/table_staff.tex")
+gtsave(tbl_unity,  "output/table_unity.tex")
+gtsave(tbl_cospon, "output/table_cospon.tex")
 
 # ─── Legislative Style (Multinomial Logit) ────────────────────────────────────
 # Separate treatment: district/congress FE not available in multinomial logit;
@@ -338,13 +335,13 @@ models_style <- list(
 models_style_bin <- setNames(
   models_style[c("Birth (Binary)", "Birth, Restricted (Binary)",
                  "Death Place (Binary)", "Pooled (Binary)")],
-  c("Original", "Original (Restricted)", "Death Place", "Pooled")
+  c("Original", "Orig. (Restr.)", "Death Place", "Pooled")
 )
 
 models_style_log <- setNames(
   models_style[c("Birth (Log. Distance)", "Birth, Restricted (Log. Distance)",
                  "Death Place (Log. Distance)", "Pooled (Log. Distance)")],
-  c("Original", "Original (Restricted)", "Death Place", "Pooled")
+  c("Original", "Orig. (Restr.)", "Death Place", "Pooled")
 )
 
 # coef_map for style tables: only the substantively relevant predictors
@@ -384,7 +381,7 @@ style_note <- paste0(
   "Congress included as a factor variable (no district FE). ",
   "Coefficients relative to 'Party Focused' baseline. ",
   "'Original': full sample. ",
-  "'Original (Restricted)' / 'Death Place' / 'Pooled': death-place sub-sample. ",
+  "'Orig. (Restr.)' / 'Death Place' / 'Pooled': death-place sub-sample. ",
   "* p < 0.10, ** p < 0.05."
 )
 
@@ -407,6 +404,7 @@ make_table_style <- function(models_4, title) {
     output   = "gt"
   ) |>
     cols_label(.list = style_col_labels) |>
+    cols_width(everything() ~ px(62)) |>
     tab_style(
       style     = cell_text(weight = "bold"),
       locations = cells_column_spanners()
@@ -416,8 +414,8 @@ make_table_style <- function(models_4, title) {
       locations = cells_column_labels()
     ) |>
     tab_options(
-      table.font.size           = px(12),
-      heading.title.font.size   = px(13),
+      table.font.size           = px(9),
+      heading.title.font.size   = px(11),
       heading.title.font.weight = "bold",
       column_labels.font.weight = "bold",
       row_group.font.weight     = "bold",
@@ -448,3 +446,15 @@ tbl_style_bin
 tbl_style_log
 gtsave(tbl_style_bin, "output/table_style_binary.html")
 gtsave(tbl_style_log, "output/table_style_log.html")
+gtsave(tbl_style_bin, "output/table_style_binary.tex")
+gtsave(tbl_style_log, "output/table_style_log.tex")
+
+# Post-process .tex files: replace Unicode × (U+00D7) with LaTeX $\times$
+# gt escapes $ and \ so we must fix the .tex files after saving.
+fix_tex_times <- function(path) {
+  txt <- readLines(path, warn = FALSE)
+  txt <- gsub("<U+00D7>", "$\\times$", txt, fixed = TRUE)
+  writeLines(txt, path)
+}
+fix_tex_times("output/table_style_binary.tex")
+fix_tex_times("output/table_style_log.tex")
